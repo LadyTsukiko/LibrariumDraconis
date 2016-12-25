@@ -1,0 +1,61 @@
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: 10%;
+
+    text-align: center;
+    background-image: url("assets/images/dragon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+nav a.active {}
+
+.flex-container > * {
+    padding: 10px;
+    flex: 1 100%;
+    font-family: 'Berkshire Swash', cursive;
+}
+
+.main {
+    text-align: left;
+    background: lime;
+}
+.title {
+    color: #b01035;
+    font-family: 'Cinzel Decorative', cursive;
+}
+/*.header {background: #123456; }
+
+.links {background: moccasin;}*/
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+.info {
+    background: transparent;
+}
+
+@media all and (min-width: 600px) {
+    .aside { flex: 1 auto; }
+}
+
+@media all and (min-width: 800px) {
+    .main    { flex: 3 0px; }
+    .links { order: 1; }
+    .main    { order: 2; }
+    .info { order: 3; }
+    .footer  { order: 4; }
+}
+
+body {
+    background: black;
+    color: aqua;
+
+
+}
