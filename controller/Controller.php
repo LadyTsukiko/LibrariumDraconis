@@ -8,6 +8,8 @@
  */
 class Controller
 {
+
+    private $title = 'Librarium Draconis';
 //Here go all functions
 
     public function login($request) {

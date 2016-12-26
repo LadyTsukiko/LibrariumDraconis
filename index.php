@@ -7,7 +7,7 @@
 	$action = $request->getParameter('action', 'home');
 	//$action = isset($_GET['action']) ? $_GET['action'] : 'home';
 	
-	// Inizialize model
+	// Initialize model  TODO: change to fit our (nonexistent) DB
 	if (!DB::create('localhost', 'www', 'w3!', 'course')) {
 		die("Unable to connect to database [".DB::getInstance()->connect_error."]");
 	}
