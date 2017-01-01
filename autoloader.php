@@ -3,7 +3,7 @@ function __autoload($class_name){
 	
 	// Directories to look in
 	$dirs = [
-		'lib/',
+		'DB/',
 		'controller/',
 		'model/',
 		'view/'
