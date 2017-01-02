@@ -25,10 +25,10 @@
 		if ($result->num_rows > 0) {
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
-			echo "<table><tr><th>ISBN</th><th>Name</th><th>autor</th></tr>";
+			echo "<table><tr><th>ISBN</th><th>Name</th><th>author</th><th>genre</th></tr>";
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
-				echo "<tr><td>".$row["ISBN"]."</td><td>".$row["name"]."</td><td> ".$row["autor"]."</td></tr>";
+				echo "<tr><td>".$row["ISBN"]."</td><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
 			}
 			echo "</table>";
 		}}else {

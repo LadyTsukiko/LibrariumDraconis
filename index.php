@@ -8,7 +8,7 @@
 	//$action = isset($_GET['action']) ? $_GET['action'] : 'home';
 	
 	// Initialize model  TODO: change to fit our (nonexistent) DB
-	if (!DB::create('localhost', 'me', 'pw', 'test')) {
+	if (!DB::create('localhost', 'me', 'pw', 'webshop')) {
 		die("Unable to connect to database [".DB::getInstance()->connect_error."]");
 	}
 	
