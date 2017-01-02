@@ -16,7 +16,7 @@ class View {
 		foreach($this->controller->getData() as $key=>$value) {
 			$$key = $value;
 		}
-		$title = 'MVC ' . $this->controller->getTitle();
+		$title = 'Librarium Draconis ' . $this->controller->getTitle();
 		include __DIR__ ."/templates/main.php";
 	}
 }

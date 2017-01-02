@@ -1,16 +1,16 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 25/12/2016
- * Time: 10:45
- */
-class Controller
-{
 
+class Controller {
+
+    private $data = array();
     private $title = 'Librarium Draconis';
 //Here go all functions
+
+    public function home($request) {
+        $this->data["message"] = "Hello World!";
+        $this->title = "Home";
+    }
 
     public function login($request) {
         $login = $request->getParameter('login', '');

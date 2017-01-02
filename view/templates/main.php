@@ -18,7 +18,23 @@
 			<a href="first.html">link3</a>
 		</nav>
 	</aside>
-	<article class="main">lore ipsum dbfjshb ds dsjbf ds dssf dsh f cdss j ja,hf c vhfd  xc jhwbdhmvbcv  hdjhbhmcb vm  ffdjbvhjbcxhjbv fvjhdfbvhj</article>
+	<article class="main">
+		<?php
+		$sql = "SELECT ISBN, name, autor FROM books";
+		$result = DB::doQuery($sql);
+		if ($result->num_rows > 0) {
+		// output data of each row
+		while($row = $result->fetch_assoc()) {
+			echo "<table><tr><th>ISBN</th><th>Name</th><th>autor</th></tr>";
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo "<tr><td>".$row["ISBN"]."</td><td>".$row["name"]."</td><td> ".$row["autor"]."</td></tr>";
+			}
+			echo "</table>";
+		}}else {
+		echo "0 results";
+		} ?>
+	</article>
 
 	<aside class="aside info">flex item 3</aside>
 	<footer class="footer"> footer </footer>
