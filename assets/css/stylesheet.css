@@ -6,7 +6,7 @@
     margin-right: 10%;
 
     text-align: center;
-    background-image: url("images/dragon.png");
+    background-image: url("assets/images/dragon.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right top;
@@ -22,7 +22,8 @@ nav a.active {}
 
 .main {
     text-align: left;
-    background: lime;
+    background: black;
+    padding-bottom: 50px;
 }
 .title {
     color: #b01035;
@@ -36,6 +37,7 @@ nav a.active {}
     bottom: 0;
     width: 100%;
     text-align: center;
+    background-color: black;
 }
 .info {
     background: transparent;
@@ -56,6 +58,14 @@ nav a.active {}
 body {
     background: black;
     color: aqua;
-
-
+}
+table {
+    border-collapse: collapse;
+}
+tr:hover {background-color: darkblue}
+th,td {
+    padding: 15px;
+}
+a{
+    color: blueviolet;
 }
