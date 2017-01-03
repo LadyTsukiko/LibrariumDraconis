@@ -3,16 +3,23 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
-    margin-right: 10%;
+
 
     text-align: center;
-    background-image: url("assets/images/dragon.png");
+    
+    /*background-image:linear-gradient(to right, black 60%,white 60%), url("../images/icedragon.jpg");
+    background-blend-mode: darken;*/
+    
+    background-image: url("../images/icedragon.jpg");
+    
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right top;
+    
+
 }
 
-nav a.active {}
+
 
 .flex-container > * {
     padding: 10px;
@@ -20,9 +27,16 @@ nav a.active {}
     font-family: 'Berkshire Swash', cursive;
 }
 
+.number{
+    color: red;
+    padding: 1%;
+}
+.curPage{
+    color: lawngreen;
+}
 .main {
     text-align: left;
-    background: black;
+    background: transparent;
     padding-bottom: 50px;
 }
 .title {
@@ -41,6 +55,7 @@ nav a.active {}
 }
 .info {
     background: transparent;
+
 }
 
 @media all and (min-width: 600px) {
@@ -68,4 +83,81 @@ th,td {
 }
 a{
     color: blueviolet;
+}
+
+.social-links {
+    margin-top: 50px;
+    color: #FFF;
+    font-family: sans-serif;
+    width: 200px;}
+  .social-links  li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;float:left;
+}
+
+
+#lang-form div {
+    float: left;
+    margin-top:1px;
+}
+
+#lang-form #dropdown-wrapper {
+    width: 100px;
+    margin-top: 20px;
+    z-index: 1000;
+}
+
+.dropdownbox {
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.dropdownbox > p {
+    display: block;
+    user-select: none;
+    -moz-user-select:none;
+    /* Safari */ -khtml-user-select: none;}
+
+ul.menu{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    position: relative;
+    margin: 0 0;
+    width: 100px;
+    overflow: hidden;
+    height: 0;
+    margin-left: -37px;
+    margin-top: 2px;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    /*-moz-transform:scale(0); */
+    color: #FFF;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select:none;
+    /* Safari */
+    -khtml-user-select: none;
+}
+
+ul.menu li {
+    padding: 2px 0;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+ul.menu li:hover {
+    padding-left: 10px;
+    color:#2E408A;
+    /*background: #1F8EC1;*/
+}
+
+.menu.showMenu {
+    /*-moz-transform:scale(1);*/
+    height: 50px;
 }

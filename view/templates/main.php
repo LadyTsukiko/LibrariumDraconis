@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title;?></title>
@@ -9,7 +9,35 @@
 </head>
 <body >
 <div class="flex-container">
-	<header class="header settings">language and stuff</header>
+	<header class="header settings">
+		<ul class="social-links">
+			<li>&#9682;</li>
+			<li>
+				<div>
+					<div id="lang-form">
+
+						<div id="language-selected" class="dropdownbox">EN &#9662;</div>
+
+						<div id="dropdown-wrapper">
+							<ul name="lang" id="select-language-menu" class="menu">
+								<li class="selected">
+									English
+									<div class="lang-code" style="display: none;">en &#9662;</div>
+								</li>
+								<li>
+									Deutsch
+									<div class="lang-code" style="display: none;">de &#9662;</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</header>
+
+
+
 	<header class="header title"><h1><?php echo $title;?></h1></header>
 	<aside class="aside links">
 		<nav>
@@ -19,43 +47,45 @@
 		</nav>
 	</aside>
 	<article class="main">
-		<?php
-		$datatable = "books";
-		$results_per_page = 20;
-		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-		$start_from = ($page-1) * $results_per_page;
-		$sql = "SELECT ISBN, bookLabel, authorLabel, genre_label, ID FROM $datatable ORDER BY ID ASC LIMIT $start_from,$results_per_page";
-		$result = DB::doQuery($sql);
-		if ($result->num_rows > 0) {
-		// output data of each row
-		while($row = $result->fetch_assoc()) {
-			echo "<table><tr><th>ISBN</th><th>name</th><th>author</th><th>genre</th></tr>";
-			// output data of each row
-			while($row = $result->fetch_assoc()) {
-				echo "<tr><td>".$row["ISBN"]."</td><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
-			}
-			echo "</table>";
-		}}else {
-		echo "0 results";
-		} ?>
-		<?php
-		$sql = "SELECT COUNT(ID) AS total FROM $datatable";
-		$result = DB::doQuery($sql);
-		$row = $result->fetch_assoc();
-		$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
-		for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-			echo "<a href='index.php?page=$i'";
-			if ($i==$page)  echo " class='curPage'";
-			echo ">$i</a> ";
-		};
-		?>
+		<?php include($innerTpl); ?>
+
 	</article>
 
-	<aside class="aside info">flex item 3</aside>
-	<footer class="footer"> footer </footer>
+	<aside class="aside info"></aside>
+	<footer class="footer">
+		 <a href="index.php?action=contact">Contact</a>
+		<a href="index.php?action=about"> about us</a>
+		<a href="index.php?action=agb">AGB</a>
+	</footer>
 </div>
 
+<script>
+	if ($('#language-selected').is(':empty')){
+		$( ".menu li" ).each(function() {
+			if($(this).attr('class') == 'selected'){
+				var selected = $(this).find('.lang-code').html().toUpperCase();
+				console.log($(this).find('.lang-code').html().toUpperCase());
+				$("#language-selected").html(selected);
+			}
+		});
+	}
 
+	//The next following line displays and set selected language
+	$(".dropdownbox").click(function(){
+		$(".menu").toggleClass("showMenu");
+		$(".menu > li").click(function(){
+			var selected = $(this).find('.lang-code').html().toUpperCase();
+			console.log($(this).find('.lang-code').html().toUpperCase());
+			$("#language-selected").html(selected);
+			$(".menu").removeClass("showMenu");
+		});
+	});
+
+	//Close language select box if nothing is selected
+	$("#dropdown-wrapper").mouseleave(function(){
+		$(".menu").removeClass("showMenu");
+	});
+</script>
 
 </body>
 </html>

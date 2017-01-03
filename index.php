@@ -4,10 +4,10 @@
 	require_once 'autoloader.php';
 
 	$request = new Request();
-	$action = $request->getParameter('action', 'home');
+	$action = $request->getParameter('action', 'table');
 	//$action = isset($_GET['action']) ? $_GET['action'] : 'home';
 	
-	// Initialize model  TODO: change to fit our (nonexistent) DB
+
 	if (!DB::create('localhost', 'me', 'pw', 'webshop')) {
 		die("Unable to connect to database [".DB::getInstance()->connect_error."]");
 	}
@@ -15,8 +15,9 @@
 	try {
 		// Create controller
 		$controller = new Controller();
-		$tpl = $controller->$action($request);
+		//$tpl = $controller->$action($request);
 		$tpl = $tpl ? $tpl : $action;
+       // $tpl = 'table';
 		
 		// Create view
 		$view = new View($controller);
