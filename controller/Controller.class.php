@@ -60,6 +60,7 @@ class Controller {
     }
 
 
+
     // P R I V A T E  H E L P E R S
 
     private $sessionState = false;
