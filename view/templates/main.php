@@ -23,7 +23,7 @@ else {include ("english.php");}
 
 			</ul>
 		</nav>
-
+	<a href="basket.php" class="basket"><img src="../../assets/images/picnic-basket-clip-art-black-and-white-clipart-panda-free-clipart-m8xH5N-clipart.png" height="38"></a>
 	</header>
 
 
@@ -43,9 +43,9 @@ else {include ("english.php");}
 
 	<aside class="aside info"></aside>
 	<footer class="footer">
-		 <a href="index.php?action=contact">Contact</a>
-		<a href="index.php?action=about"> about us</a>
-		<a href="index.php?action=agb">AGB</a>
+		 <a href="index.php?action=contact"><?php echo $foot[0]; ?></a>
+		<a href="index.php?action=about"><?php echo $foot[1]; ?></a>
+		<a href="index.php?action=agb"><?php echo $foot[2]; ?></a>
 	</footer>
 </div>
 <script>

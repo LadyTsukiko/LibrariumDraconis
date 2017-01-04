@@ -15,16 +15,19 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right top;
-    
 
 }
-
-
 
 .flex-container > * {
     padding: 10px;
     flex: 1 100%;
     font-family: 'Berkshire Swash', cursive;
+}
+.header{
+align-content: stretch;
+    align-items: flex-start;
+    alignment: left;
+
 }
 
 .number{
@@ -40,7 +43,7 @@
     padding-bottom: 50px;
 }
 .title {
-    color: #b01035;
+    color: #f0f6ff;
     font-family: 'Cinzel Decorative', cursive;
 }
 /*.header {background: #123456; }
@@ -82,21 +85,26 @@ th,td {
     padding: 15px;
 }
 a{
-    color: blueviolet;
+    color: #78e1ff;
+    padding: 10px;
+}
+header{
+    
 }
 
 nav .drop-down {
     list-style: none;
     overflow: hidden; /* When ul height is reduced, ensure overflowing li are not shown */
-    height: 84px; /* 172px = (38 (li) + 5 (li border)) * 4 (number of li) */
+    height: 86px;
     background-color: #34495e;
-    font-family: Arial;
     width: 200px;
     margin: 0 auto;
     padding: 0;
-    text-align: left;
+    text-align: center;
     -webkit-transition: height 0.3s ease;
     transition: height 0.3s ease;
+    float: left;
+    position: absolute;
 }
 
 nav .drop-down.closed {

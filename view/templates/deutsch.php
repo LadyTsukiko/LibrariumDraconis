@@ -1,6 +1,9 @@
 <?php
 $language = "deutsch";
 $other = "english";
+$foot = array("Kontakt","Über uns","AGB");
+//TODO add all
+
 /**
  * Created by PhpStorm.
  * User: alex
