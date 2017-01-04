@@ -6,34 +6,30 @@
 	<title><?php echo $title;?></title>
 	<link rel="stylesheet" href="assets/css/stylesheet.css">
 	<link href="https://fonts.googleapis.com/css?family=Aladin|Astloch:700|Berkshire+Swash|Cinzel+Decorative:400,900|Homemade+Apple|IM+Fell+Double+Pica|Lily+Script+One|Milonga|Montez|Norican" rel="stylesheet">
+	<script src="assets/jquery-3.1.1.min.js"></script>
+	<script>
+		$(function() {
+			// Bind Click event to the drop down navigation button
+			$(".nav-button").click(function() {
+				/*  Toggle the CSS closed class which reduces the height of the UL thus
+				 hiding all LI apart from the first */
+				$(this).parent().parent().toggleClass("closed");
+				//$(this).hide();
+			});
+
+		});</script>
 </head>
 <body >
 <div class="flex-container">
 	<header class="header settings">
-		<ul class="social-links">
-			<li>&#9682;</li>
-			<li>
-				<div>
-					<div id="lang-form">
+		<nav>
+			<ul class="drop-down closed">
+				<li><a href="#" class="nav-button">English</a></li>
+				<li><a href="#">Deutsch</a></li>
 
-						<div id="language-selected" class="dropdownbox">EN &#9662;</div>
+			</ul>
+		</nav>
 
-						<div id="dropdown-wrapper">
-							<ul name="lang" id="select-language-menu" class="menu">
-								<li class="selected">
-									English
-									<div class="lang-code" style="display: none;">en &#9662;</div>
-								</li>
-								<li>
-									Deutsch
-									<div class="lang-code" style="display: none;">de &#9662;</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</li>
-		</ul>
 	</header>
 
 
@@ -58,34 +54,5 @@
 		<a href="index.php?action=agb">AGB</a>
 	</footer>
 </div>
-
-<script>
-	if ($('#language-selected').is(':empty')){
-		$( ".menu li" ).each(function() {
-			if($(this).attr('class') == 'selected'){
-				var selected = $(this).find('.lang-code').html().toUpperCase();
-				console.log($(this).find('.lang-code').html().toUpperCase());
-				$("#language-selected").html(selected);
-			}
-		});
-	}
-
-	//The next following line displays and set selected language
-	$(".dropdownbox").click(function(){
-		$(".menu").toggleClass("showMenu");
-		$(".menu > li").click(function(){
-			var selected = $(this).find('.lang-code').html().toUpperCase();
-			console.log($(this).find('.lang-code').html().toUpperCase());
-			$("#language-selected").html(selected);
-			$(".menu").removeClass("showMenu");
-		});
-	});
-
-	//Close language select box if nothing is selected
-	$("#dropdown-wrapper").mouseleave(function(){
-		$(".menu").removeClass("showMenu");
-	});
-</script>
-
 </body>
 </html>
