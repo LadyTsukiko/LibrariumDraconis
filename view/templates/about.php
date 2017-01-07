@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 03/01/2017
- * Time: 19:35
- */
+
+<h3><?php echo $foot[1]; ?></h3>
+<p>
+    <?php echo $abomes; ?> </p>
+<p>&raquo; <a href="index.php"><?php echo $home; ?> </a></p>

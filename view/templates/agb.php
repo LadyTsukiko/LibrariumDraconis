@@ -1,9 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 03/01/2017
- * Time: 19:35
- */
-echo "<p>we don't have any</p>";
-?>
+<h3><?php echo $foot[2]?></h3>
+<p>
+    <?php echo $agbmes; ?> </p>
+<p>&raquo; <a href="index.php"><?php echo $home; ?> </a></p>

@@ -17,7 +17,7 @@ class DB extends mysqli{
 		return self::getInstance()->query($sql);
 	}
 	
-	private function __construct($host, $user, $pw, $dbname) {
+	public function __construct($host, $user, $pw, $dbname) {
 		parent::__construct($host, $user, $pw, $dbname);
 	}
 }

@@ -45,11 +45,17 @@ align-content: stretch;
     padding-bottom: 50px;
 }
 .title {
-    font-family: 'IM Fell Great Primer SC', cursive;
+    font-family: 'IM Fell Great Primer SC', Serif;
     font-size: 150%;
-    color: red;
+    color: aqua;
     background-color: transparent;
+
 }
+a.title:link {
+
+    text-decoration: none;
+}
+
 .sorting-title {
     font-family: 'IM Fell Great Primer SC', cursive;
     text-align: center;
@@ -85,6 +91,9 @@ font-family: 'Berkshire Swash';
 .field{
 
 }
+.button:hover{
+    background-color: #4a657a;
+}
 .button{
     background-color: #34495e;
     text-decoration: none;
@@ -101,6 +110,7 @@ font-family: 'Berkshire Swash';
     border: none;
     color: aqua;
 }
+
 .button.confirm{
 
 }
@@ -202,4 +212,7 @@ nav .drop-down li:first-child a:after {
 }
 .drop-down.sortmenu.sort2 {
     z-index: 8;
+}
+.drop-down li:hover {
+    background-color: #4a657a;
 }
