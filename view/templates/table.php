@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
         echo "<table><tr><th>ISBN</th><th>name</th><th>author</th><th>genre</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["ISBN"]."</td><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
+            echo "<tr class='book'><td>".$row["ISBN"]."</td><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
         }
         echo "</table>";
     }}else {
@@ -35,3 +35,11 @@ for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
     echo "'>$i</a> ";
 };
 ?>
+
+<script>
+    $(".book").click(function () {
+        var isbn = this.getElementsByTagName("td")[0].innerHTML;
+        alert(isbn);
+        window.location.href = "index.php?action=book&isbn=" + String(isbn);
+    });
+</script>

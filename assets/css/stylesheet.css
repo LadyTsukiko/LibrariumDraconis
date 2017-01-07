@@ -12,9 +12,10 @@
     
     background-image: url("../images/icedragon.jpg");
     
-    background-size: contain;
+    background-size: 30% ;
     background-repeat: no-repeat;
     background-position: right top;
+    
 
 }
 
@@ -27,6 +28,7 @@
 align-content: stretch;
     align-items: flex-start;
     alignment: left;
+    background-color: black;
 
 }
 
@@ -35,20 +37,33 @@ align-content: stretch;
     padding: 1%;
 }
 .curPage{
-    color: lawngreen;
+    color: aqua;
 }
 .main {
-    text-align: left;
+    text-align: center;
     background: transparent;
     padding-bottom: 50px;
 }
 .title {
-    color: #f0f6ff;
-    font-family: 'Cinzel Decorative', cursive;
+    font-family: 'IM Fell Great Primer SC', cursive;
+    font-size: 150%;
+    color: red;
+    background-color: transparent;
 }
-/*.header {background: #123456; }
+.sorting-title {
+    font-family: 'IM Fell Great Primer SC', cursive;
+    text-align: center;
+    float: none;
+    font-size: 120%;
+    width: 150px;
+}
 
-.links {background: moccasin;}*/
+.basket{
+
+}
+/*.header {background: #123456; }*/
+
+
 .footer{
     position: fixed;
     bottom: 0;
@@ -60,14 +75,60 @@ align-content: stretch;
     background: transparent;
 
 }
+.input{
+font-family: 'Berkshire Swash';
+}
+.login-label{
+    width: 200px;
 
+}
+.field{
+
+}
+.button{
+    background-color: #34495e;
+    text-decoration: none;
+    height: 43px;
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    vertical-align: middle;
+    padding: 0;
+    text-align: center;
+    -webkit-transition: height 0.3s ease;
+    transition: height 0.3s ease;
+    position: relative;
+    border: none;
+    color: aqua;
+}
+.button.confirm{
+
+}
+.login {
+    float:right;
+    line-height: 43px;
+
+
+}
+@media all and (min-width: 570px) {
+    .aside {
+        flex: 1 auto;
+    }
+
+    .links {
+        min-width: 210px;
+    }
+}
 @media all and (min-width: 600px) {
     .aside { flex: 1 auto; }
+    .links { min-width: 210px;}
 }
 
 @media all and (min-width: 800px) {
     .main    { flex: 3 0px; }
     .links { order: 1; }
+    .links { max-width: 210px;}
+    .links { min-width: 210px;}
     .main    { order: 2; }
     .info { order: 3; }
     .footer  { order: 4; }
@@ -120,7 +181,7 @@ nav .drop-down li {
 
 nav .drop-down li a {
     display: block;
-    color: #ecf0f1;
+    color: aqua;
     text-decoration: none;
     padding: 10px; /* Larger touch target area */
 }
@@ -130,4 +191,15 @@ nav .drop-down li:first-child a:after {
     float: right;
     margin-left: -30px; /* Excessive -margin to bring link text back to center */
     margin-right: 5px;
+}
+
+.drop-down.sortmenu{
+    float: none;
+    clear:both;
+    position:relative;
+    height: auto;
+    z-index:10;
+}
+.drop-down.sortmenu.sort2 {
+    z-index: 8;
 }
