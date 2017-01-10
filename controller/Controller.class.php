@@ -1,83 +1,339 @@
 <?php
 
 
-class Controller {
+class Controller
+{
 
     private $data = array();
     private $title = 'Librarium Draconis';
 //Here go all functions
+    private $sessionState = false;
 
-    public function home($request) {
+    public function home($request)
+    {
         $this->data["message"] = "Hello World!";
         $this->title = "Home";
-    }
-
-    public function login($request) {
-        $login = $request->getParameter('login', '');
-        $pw = $request->getParameter('pw', '');
-        if ($login && $pw) {
-            if (!User::checkCredentials($login, $pw)) {
-                $this->data["message"] = "Sorry, wrong credentials!";
-                return;
-            } else {
-                $this->startSession();
-                $_SESSION['user'] = $login;
-                $this->data["message"] = "Hi ".ucfirst($login)." you just logged in!";
-                return 'home';
-            }
-        }
-    }
-
-    public function logout($request) {
-        $this->startSession();
-        session_destroy();
-        $_SESSION = array();
-        $this->data["message"] = "You just logged out!";
         return 'home';
     }
 
-    // H E L P E R S
-
-    public function &getData() {
-        return $this->data;
+    public function table($request)
+    {
+        $this->data["message"] = "Hello World!";
+        $this->title = "Home";
+        return 'table';
     }
 
-    public function __call($function, $args) {
-        throw new Exception("The action $function does not exist!");
+    public function agb($request)
+    {
+        $this->data["message"] = "Hello World!";
+        $this->title = "Terms";
+        return 'agb';
     }
 
-    public function isLoggedIn() {
-        $this->startSession();
-        return isset($_SESSION['user']);
+    public function book($request)
+    {
+        $this->data["message"] = "Hello World!";
+        $this->title = "Book View";
+        return 'book';
     }
 
-    public function getTitle() {
-        return $this->title;
+    public function contact($request)
+    {
+        $this->data["message"] = "Hello World!";
+        $this->title = "Contact";
+        return 'contact';
     }
 
-    public function redirect($action) {
-        header("Location: index.php?action=$action");
+    public function about($request)
+    {
+        $this->data["message"] = "Hello World!";
+        $this->title = "About";
+        return 'about';
     }
 
+    public function cart($request)
+    {   $this->startSession();
+        $cart = $_SESSION['cart'];
+        $operation = $_GET['op'];
+        switch ($operation) {
+            case 'add';
+                if ($cart) {
+                    $cart .= ','.$_GET['id'];
+
+                } else {
+                    echo "<script type='text/javascript'>alert('fuuu');</script>";
+                    $cart = $_GET['id'];
+                }
+                break;
+            case 'delete';
+                if ($cart) {
+                    $items = explode(',', $cart);
+                    $newcart = '';
+                    foreach ($items as $item) {
+                        if ($_GET['id'] != $item) {
+                            if ($newcart != '') {
+                                $newcart .= ',' . $item;
+                            } else {
+                                $newcart = $item;
+                            }
+                        }
+                    }
+                    $cart = $newcart;
+                }
+                break;
+            case
+            'update';
+                if ($cart) {
+                    $newcart = '';
+                    foreach ($_POST as $key => $value) {
+                        if (stristr($key, 'qty')) {
+                            $id = str_replace('qty', '', $key);
+                            $items = ($newcart != '') ? explode(',', $newcart) : explode(',', $cart);
+                            $newcart = '';
+                            foreach ($items as $item) {
+                                if ($id != $item) {
+                                    if ($newcart != '') {
+                                        $newcart .= ',' . $item;
+                                    } else {
+                                        $newcart = $item;
+                                    }
+                                }
+                            }
+                            for ($i = 1; $i <= $value; $i++) {
+                                if ($newcart != '') {
+                                    $newcart .= ',' . $id;
+                                } else {
+                                    $newcart = $id;
+                                }
+                            }
+                        }
+                    }
+                }
+                $cart = $newcart;
+                break;
+        }
+        $_SESSION['cart'] = $cart;
+                return 'cart';
+        }
+
+   public function showCart()
+        {   $this->startSession();
+            $cart = $_SESSION['cart'];
+            if ($cart) {
+                $items = explode(',', $cart);
+                $contents = array();
+                foreach ($items as $item) {
+                    $contents[$item] = (isset($contents[$item])) ? $contents[$item] + 1 : 1;
+                }
+                $output[] = '<form action="index.php?action=cart&op=update" method="post" id="cart">';
+                $output[] = '<table class="cart">';
+                foreach ($contents as $id => $qty) {
+                    $sql = 'SELECT * FROM books WHERE ID = ' . $id;
+                    $result = DB::doQuery($sql);
+                    $row = $result->fetch_assoc();
+                    $output[] = '<tr>';
+                    $output[] = '<td><a href="index.php?action=cart&op=delete&id=' . $id . '" class="r">Remove</a></td>';
+                    $output[] = '<td>' .$row['bookLabel'] . ' by ' . $row['authorLabel'] . '</td>';
+                    //$output[] = '<td>&pound;' . $price . '</td>';
+                    $output[] = '<td><input type="text" name="qty' . $id . '" value="' . $qty . '" size="3" maxlength="3" /></td>';
+                    //$output[] = '<td>&pound;' . ($price * $qty) . '</td>';
+                    $output[] = '</tr>';
+                }
+                $output[] = '</table>';
+                //$output[] = '<p>Grand total: &pound;' . $total . '</p>';
+                $output[] = '<div><button type="submit">Update cart</button></div>';
+                $output[] = '</form>';
+            } else {
+                $output[] = '<p>You shopping cart is empty.</p>';
+            }
+            return implode('', $output);
+        }
+
+        public
+        function login($request)
+        {
+            $login = trim($request->getParameter('login', ''));
+            $pw = trim($request->getParameter('pw', ''));
 
 
-    // P R I V A T E  H E L P E R S
+            $login = strip_tags($login);
+            $login = htmlspecialchars($login);
 
-    private $sessionState = false;
 
-    private function startSession() {
-        if (!$this->sessionState) {
-            $this->sessionState = session_start();
+            $pw = strip_tags($pw);
+            $pw = htmlspecialchars($pw);
+
+            if ($login && $pw) {
+                $passHash = hash('sha256', $pw);
+                if (!User::checkCredentials($login, $passHash)) {
+                    $this->data["message"] = "Sorry, wrong credentials!";
+                    return;
+                } else {
+
+                    $this->startSession();
+                    $_SESSION['user'] = $login;
+                    $this->data["message"] = "Hi " . ucfirst($login) . " you just logged in!";
+                    return 'table';
+                }
+            }
+        }
+
+        private
+        function startSession()
+        {
+            if (!$this->sessionState) {
+                $this->sessionState = session_start();
+            }
+        }
+
+        public
+        function register($request)
+        {
+
+            $login = trim($request->getParameter('login', ''));
+            $login = strip_tags($login);
+            $login = htmlspecialchars($login);
+
+            $email = trim($request->getParameter('email', ''));
+            $email = strip_tags($email);
+            $email = htmlspecialchars($email);
+
+            $pw = trim($request->getParameter('pw', ''));
+            $pw = strip_tags($pw);
+            $pw = htmlspecialchars($pw);
+
+
+            if ($login && $pw && $email) {
+                $passHash = hash('sha256', $pw);
+                User::registerUser($login, $passHash, $email);
+                return 'login';
+            }
+
+        }
+
+        public
+        function logout($request)
+        {
+            $this->startSession();
+            session_destroy();
+            $_SESSION = array();
+            $this->data["message"] = "You just logged out!";
+            return 'table';
+        }
+
+        // H E L P E R S
+
+        public
+        function checkout($request)
+        {
+            $this->startSession();
+            $login = $_SESSION['user'];
+            $id = Address::getID($login);
+
+            if (Address::checkIfAddressExists($id)) {
+
+                if (isset($_POST['buttonOrder'])) {
+                    return 'order';
+                }
+
+                $row = Address::getAddress($id);
+                $_SESSION['address'] = $row;
+
+                return;
+
+
+            } else {
+                $name = trim($request->getParameter('name', ''));
+                $name = strip_tags($name);
+                $name = htmlspecialchars($name);
+
+                $surname = trim($request->getParameter('surname', ''));
+                $surname = strip_tags($surname);
+                $surname = htmlspecialchars($surname);
+
+                $street = trim($request->getParameter('street', ''));
+                $street = strip_tags($street);
+                $street = htmlspecialchars($street);
+
+                $streetnumber = trim($request->getParameter('streetnumber', ''));
+                $streetnumber = strip_tags($streetnumber);
+                $streetnumber = htmlspecialchars($streetnumber);
+
+                $city = trim($request->getParameter('city', ''));
+                $city = strip_tags($city);
+                $city = htmlspecialchars($city);
+
+                $zip = trim($request->getParameter('zip', ''));
+                $zip = strip_tags($zip);
+                $zip = htmlspecialchars($zip);
+
+                if ($name && $surname && $street && $streetnumber && $city && $zip) {
+                    Address::storeAddress($id, $name, $surname, $street, $streetnumber, $city, $zip);
+                    return 'order';
+                }
+            }
+
+        }
+
+        public
+        function order($request)
+        {
+           /* $this->startSession();
+            $login = $_SESSION['user'];
+            $id = Address::getID($login);
+            $row = Address::getAddress($id);
+            $_SESSION['address'] = $row; */
+            $this->data["message"] = "Hello World!";
+            $this->title = "Order";
+            return 'order';
+
+        }
+
+        public
+        function &getData()
+        {
+            return $this->data;
+        }
+
+        public
+        function __call($function, $args)
+        {
+            throw new Exception("The action $function does not exist!");
+        }
+
+        public
+        function isLoggedIn()
+        {
+            $this->startSession();
+            return isset($_SESSION['user']);
+        }
+
+
+        // P R I V A T E  H E L P E R S
+
+        public
+        function getTitle()
+        {
+            return $this->title;
+        }
+
+        public
+        function redirect($action)
+        {
+            header("Location: index.php?action=$action");
+        }
+
+        private
+        function page404()
+        {
+            header("HTTP/1.1 404 Not Found");
+            return 'page404';
+        }
+
+        private
+        function internalRedirect($action, $request)
+        {
+            $tpl = $this->$action($request);
+            return $tpl ? $tpl : $action;
         }
     }
-
-    private function page404(){
-        header("HTTP/1.1 404 Not Found");
-        return 'page404';
-    }
-
-    private function internalRedirect($action, $request) {
-        $tpl = $this->$action($request);
-        return $tpl ? $tpl : $action;
-    }
-}

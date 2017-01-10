@@ -10,23 +10,35 @@ $datatable = "books";
 $results_per_page = 20;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 $start_from = ($page-1) * $results_per_page;
-$sql = "SELECT ISBN, bookLabel, authorLabel, genre_label, ID FROM $datatable ORDER BY ID ASC LIMIT $start_from,$results_per_page";
-$result = DB::doQuery($sql);
+$sqlSelect = "SELECT bookLabel, authorLabel, genre_label, ID";
+$sqlEnd = "ORDER BY ID ASC LIMIT $start_from,$results_per_page";
+if (isset($_GET["auname"])){
+    $sql = " FROM $datatable WHERE authorLabel = '".$_GET["auname"]."' ";
+}
+elseif (isset($_GET["genre"])){
+    $sql =  " FROM $datatable WHERE genre_label = '%{$_GET["genre"]}%' ";
+}
+elseif ($page==1) {
+    $sql = " FROM $datatable ";
+}
+
+
+$result = DB::doQuery($sqlSelect.$sql.$sqlEnd);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<table><tr><th>ISBN</th><th>name</th><th>author</th><th>genre</th></tr>";
+        echo "<table><tr><th>name</th><th>author</th><th>genre</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr class='book'><td>".$row["ISBN"]."</td><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
+            echo "<tr class='bookRow'><td>".$row["bookLabel"]."</td><td>".$row["authorLabel"]."</td><td> ".$row["genre_label"]."</td></tr>";
         }
         echo "</table>";
     }}else {
     echo "0 results";
 } ?>
 <?php
-$sql = "SELECT COUNT(ID) AS total FROM $datatable";
-$result = DB::doQuery($sql);
+$sqlSelect = "SELECT COUNT(ID) AS total";
+$result = DB::doQuery($sqlSelect.$sql);
 $row = $result->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
 for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
@@ -37,9 +49,8 @@ for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
 ?>
 
 <script>
-    $(".book").click(function () {
-        var isbn = this.getElementsByTagName("td")[0].innerHTML;
-        alert(isbn);
-        window.location.href = "index.php?action=book&isbn=" + String(isbn);
+    $(".bookRow").click(function () {
+        var title = this.getElementsByTagName("td")[0].innerHTML;
+        window.location.href = "index.php?action=book&title=" + String(title);
     });
 </script>

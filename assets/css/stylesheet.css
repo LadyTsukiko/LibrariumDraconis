@@ -12,10 +12,9 @@
     
     background-image: url("../images/icedragon.jpg");
     
-    background-size: 30% ;
+    background-size: auto;
     background-repeat: no-repeat;
     background-position: right top;
-    
 
 }
 
@@ -25,8 +24,8 @@
     font-family: 'Berkshire Swash', cursive;
 }
 .header{
-align-content: stretch;
-    align-items: flex-start;
+    align-content: space-between;
+    align-items: baseline;
     alignment: left;
     background-color: black;
 
@@ -51,16 +50,18 @@ align-content: stretch;
     background-color: transparent;
 
 }
-a.title:link {
-
+a.title:link, .title:active .title:visited {
     text-decoration: none;
 }
 
-.sorting-title {
+h3 {
     font-family: 'IM Fell Great Primer SC', cursive;
+    font-size: 120%;
+}
+
+.sorting-title {
     text-align: center;
     float: none;
-    font-size: 120%;
     width: 150px;
 }
 
@@ -76,6 +77,9 @@ a.title:link {
     width: 100%;
     text-align: center;
     background-color: black;
+    border-top: groove;
+    border-color: #1e1e1e;
+    border-width: 2px;
 }
 .info {
     background: transparent;
@@ -84,12 +88,22 @@ a.title:link {
 .input{
 font-family: 'Berkshire Swash';
 }
-.login-label{
-    width: 200px;
 
-}
+
 .field{
-
+    width: 200px;
+    height: 43px;
+    border: none;
+    position: relative;
+}
+.field.city{
+    width: 40%;
+}
+.field.checkout{
+    width: 50%;
+}
+.field.zip{
+    width: 10%;
 }
 .button:hover{
     background-color: #4a657a;
@@ -101,9 +115,10 @@ font-family: 'Berkshire Swash';
     width: 200px;
     margin: 0 auto;
     display: block;
+    text-align: center;
     vertical-align: middle;
     padding: 0;
-    text-align: center;
+
     -webkit-transition: height 0.3s ease;
     transition: height 0.3s ease;
     position: relative;
@@ -112,13 +127,61 @@ font-family: 'Berkshire Swash';
 }
 
 .button.confirm{
+    vertical-align: middle;
+    line-height: 43px;
+    color: aqua;
+
+}
+
+#logged_in{
+    float:right;
+    line-height: 1em;
+    margin-right: 1%;
+    margin-left: 1%;
+
+    width: 200px;
+    right: 200px;
+    left: 200px;
+}
+.button.login.cartlink {
+    background-color: #34495e;
+    float: left;
+    height: 43px;
+    margin-right: 1%;
+    margin-left:1%;
+    width: 200px;
+    left:200px;
+    right: 200px;
+    text-align: center;
+}
+.button.login.cartlink:hover{
+    background-color: #4a657a;
+
+}
+#cart {
+    height: 33px;
+    float: right;
+    margin: 5px;
+
 
 }
 .login {
     float:right;
     line-height: 43px;
-
-
+}
+.book {
+    text-align: left;
+}
+.book th {
+    padding-bottom: 2px;
+    padding-top: 10px;
+}
+.book td{
+    padding-bottom: 10px;
+    padding-top: 2px;
+}
+.book tr:hover{
+    background-color: transparent;
 }
 @media all and (min-width: 570px) {
     .aside {
@@ -151,13 +214,16 @@ body {
 table {
     border-collapse: collapse;
 }
-tr:hover {background-color: darkblue}
+tr:hover {background-color: #4a657a}
 th,td {
     padding: 15px;
 }
 a{
-    color: #78e1ff;
+    color: aqua;
     padding: 10px;
+}
+a.inline{
+    padding: 0px;
 }
 header{
     
@@ -176,6 +242,9 @@ nav .drop-down {
     transition: height 0.3s ease;
     float: left;
     position: absolute;
+
+
+
 }
 
 nav .drop-down.closed {
@@ -209,6 +278,14 @@ nav .drop-down li:first-child a:after {
     position:relative;
     height: auto;
     z-index:10;
+    overflow-y: inherit;
+    max-height: 600px;
+}
+.drop-down.sortmenu.closed{
+    overflow-y: hidden;
+}
+.drop-down ul {
+    position: absolute;
 }
 .drop-down.sortmenu.sort2 {
     z-index: 8;
@@ -216,3 +293,11 @@ nav .drop-down li:first-child a:after {
 .drop-down li:hover {
     background-color: #4a657a;
 }
+#rsp_email{
+    padding-top: 12px;
+    position: absolute;
+    text-align: center;
+
+}
+
+/*.header {background:

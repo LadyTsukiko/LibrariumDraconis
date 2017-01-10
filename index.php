@@ -5,7 +5,7 @@
 
 	$request = new Request();
 	$action = $request->getParameter('action', 'table');
-	//$action = isset($_GET['action']) ? $_GET['action'] : 'home';
+	$action = isset($_GET['action']) ? $_GET['action'] : 'table';
 	
 
 	if (!DB::create('localhost', 'me', 'pw', 'webshop')) {
@@ -15,7 +15,7 @@
 	try {
 		// Create controller
 		$controller = new Controller();
-		//$tpl = $controller->$action($request);
+		$tpl = $controller->$action($request);
 		$tpl = $tpl ? $tpl : $action;
        // $tpl = 'table';
 		

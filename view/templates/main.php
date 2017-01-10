@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="assets/css/stylesheet.css">
 	<link href="https://fonts.googleapis.com/css?family=Aladin|Astloch:700|IM+Fell+Great+Primer+SC|Berkshire+Swash|Cinzel+Decorative:400,900|Homemade+Apple|IM+Fell+Double+Pica|Lily+Script+One|Milonga|Montez|Norican" rel="stylesheet">
 	<script src="assets/jquery-3.1.1.min.js"></script>
+	<script  src="assets/ajaxrequest.js"></script>
 
 </head>
 <body >
@@ -23,8 +24,22 @@ else {include ("english.php");}
 
 			</ul>
 		</nav>
-	<a href="basket.php" class="basket"><img src="../../assets/images/picnic-basket-clip-art-black-and-white-clipart-panda-free-clipart-m8xH5N-clipart.png" height="38"></a>
-	<a href="index.php?action=login" class="button login"><?php echo $login;?></a>
+        <div id="basketlink">
+            <a href="index.php?action=cart" class="button login cartlink"><?php echo $cart; ?><img id="cart" src="assets/images/basket_transparent.png"></a>
+			<a href="index.php?action=checkout" class="button login"><?php echo $checkout; ?></a>
+        </div>
+
+            <?php
+        if ($this->controller->isLoggedIn()) {
+            echo '<a href="index.php?action=logout" class="button login">Logout</a><p id="logged_in">Logged in as '.$_SESSION['user'].  '</p>';
+
+        } else {
+            echo '<a href="index.php?action=login" class="button login">'.$login.'</a>';
+        }
+        ?>
+
+
+
 	</header>
 
 
@@ -56,9 +71,6 @@ else {include ("english.php");}
 	}
 
 
-
-
-
 	$(function() {
 
 		$(".not-selected").click(function () {
@@ -88,6 +100,7 @@ else {include ("english.php");}
 		}
 		return "";
 	}
+
 
 </script>
 </body>

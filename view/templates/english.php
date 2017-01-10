@@ -17,6 +17,27 @@ $date = "First published";
 $series = "Series";
 $regmes1 = "No account?";
 $regmes2 = "Click here to register!";
+$register = "Register";
+$description = "Description";
+$add = "Add to cart";
+$dateFormat = "Y.m.d";
+$cart = "Cart";
+$order = "Place order";
+$checkout = "Checkout";
+$name = "Name";
+$surname = "Surname";
+$street = "Street";
+$streetnumber = "Streetnumber";
+$city = "City";
+$zip = "Zip-Code";
+$ordermsg = "Thank you! Your order has been placed!";
+$update = "Update";
+$deliveryaddress = "Delivery address";
+
+    
+    
+
+
 
 
 /**

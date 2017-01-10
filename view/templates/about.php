@@ -3,3 +3,5 @@
 <p>
     <?php echo $abomes; ?> </p>
 <p>&raquo; <a href="index.php"><?php echo $home; ?> </a></p>
+
+<?php echo $message; ?> </p>
