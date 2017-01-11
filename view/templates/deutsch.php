@@ -31,7 +31,14 @@ $zip = "PLZ";
 $ordermsg = "Vielen Dank! Ihre Bestellung wurde aufgegeben!";
 $update = "Aktualisieren";
 $deliveryaddress = "Lieferaddresse";
-
+$orderedbooks = "Bestellte Bücher";
+$home = "Zurück zur Hauptseite";
+$booktitle = "Titel";
+$loggedin = "Sie sind angemeldet als: ";
+$logout = "Abmelden";
+$updatecart = "Warenkorb Aktualisieren";
+$by = " von ";
+$remove = "löschen";
 
 
 

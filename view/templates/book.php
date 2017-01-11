@@ -1,5 +1,5 @@
 <?php
-$title = (string)$_GET['title'];
+$title = DB::getInstance()->real_escape_string($_GET['title']);
 $datatable = 'books';
 $sql = "SELECT `bookLabel`, `authorLabel`, `genre_label`, `series_label`, `publicationDate`, `ISBN`, `ID` FROM `books` WHERE `bookLabel` = '" . $title . "'";
 $result = DB::doQuery($sql);
@@ -10,11 +10,12 @@ $ISBN = str_replace('-', '', $ISBN);
 $jason = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:$ISBN");
 $obj = json_decode($jason, true);
 
-echo "<h2>" . $row["bookLabel"] . "</h2>";
+echo "<h3>" . $row["bookLabel"] . "</h3>";
 echo "<img src= " . $obj['items'][0]['volumeInfo']['imageLinks']['thumbnail'] . ">";
 
 if ($this->controller->isLoggedIn()) {
-echo " <a href='index.php?action=cart&op=add&id=".$row["ID"]."' class='button'>".$add."</a> ";}
+
+echo "<a href='index.php?action=cart&op=add&id=".$row["ID"]."' class='button add'>".$add."</a> ";}
 echo "<table class='book'><tr><th>$author</th><th></th></tr><tr><td></td><td>" . $row["authorLabel"] . "</td></tr>";
 
 if (($row["publicationDate"]) != "") {

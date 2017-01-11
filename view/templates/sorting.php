@@ -6,6 +6,8 @@
  * Time: 14:13
  */
 ?>
+
+<div class="sortassembly">
 <h3 class="sorting-title"><?php echo $sort; ?></h3>
 </br>
 <ul class="drop-down closed sortmenu">
@@ -39,3 +41,4 @@ $result = DB::doQuery($sql);
 
 </ul>
 
+</div>

@@ -6,9 +6,14 @@
 	$request = new Request();
 	$action = $request->getParameter('action', 'table');
 	$action = isset($_GET['action']) ? $_GET['action'] : 'table';
-	
+    $config = simplexml_load_file("../dbconfig.xml");
+    $host = $config->host;
+    $user = $config->user;
+    $password = $config->pw;
+    $dbname = $config->dbname;
 
-	if (!DB::create('localhost', 'me', 'pw', 'webshop')) {
+
+	if (!DB::create($host, $user, $password,$dbname)) {
 		die("Unable to connect to database [".DB::getInstance()->connect_error."]");
 	}
 	

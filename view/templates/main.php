@@ -3,6 +3,7 @@
 <html  xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo $title;?></title>
 	<link rel="stylesheet" href="assets/css/stylesheet.css">
 	<link href="https://fonts.googleapis.com/css?family=Aladin|Astloch:700|IM+Fell+Great+Primer+SC|Berkshire+Swash|Cinzel+Decorative:400,900|Homemade+Apple|IM+Fell+Double+Pica|Lily+Script+One|Milonga|Montez|Norican" rel="stylesheet">
@@ -15,53 +16,56 @@
 if($_COOKIE['language'] === 'Deutsch'){include ("deutsch.php");}
 else {include ("english.php");}
 ?>
-<div class="flex-container">
-	<header class="header settings">
+
+
+		<ul class="navbar">
 		<nav>
+
 			<ul class="drop-down closed">
 				<li><a href="#" class="nav-button"><?php echo $language;?></a></li>
 				<li><a href="#" class="not-selected"><?php echo $other;?></a></li>
-
 			</ul>
 		</nav>
-        <div id="basketlink">
-            <a href="index.php?action=cart" class="button login cartlink"><?php echo $cart; ?><img id="cart" src="assets/images/basket_transparent.png"></a>
-			<a href="index.php?action=checkout" class="button login"><?php echo $checkout; ?></a>
-        </div>
-
-            <?php
+            <a href="index.php?action=cart" class="button login cartlink"><?php echo $cart; ?></a>
+<?php
         if ($this->controller->isLoggedIn()) {
-            echo '<a href="index.php?action=logout" class="button login">Logout</a><p id="logged_in">Logged in as '.$_SESSION['user'].  '</p>';
-
+            echo '<a href="index.php?action=logout" class="button login">'.$logout.'</a>
+            	<p id="logged_in">'.$loggedin.' '.$_SESSION['user'].'</p>';
         } else {
             echo '<a href="index.php?action=login" class="button login">'.$login.'</a>';
         }
-        ?>
+?>
+		</ul>
 
-
-
-	</header>
-
+<div class="flex-container">
 
 
 	<header><h1><a class="header title" href="index.php"><?php echo $title;?></a></h1></header>
+
 	<aside class="aside links">
 		<nav>
-			<?php include("sorting.php"); ?>
+			<?php session_start();
+			if($test =$this->controller->getTitle()=='Home'){ include("sorting.php");}
+			 ?>
 		</nav>
 	</aside>
 	<article class="main">
 		<?php include($innerTpl); ?>
-
 	</article>
 
-	<aside class="aside info"></aside>
+
+	<aside class="info"></aside>
+</div>
+
+
+
 	<footer class="footer">
 		 <a href="index.php?action=contact"><?php echo $foot[0]; ?></a>
 		<a href="index.php?action=about"><?php echo $foot[1]; ?></a>
 		<a href="index.php?action=agb"><?php echo $foot[2]; ?></a>
 	</footer>
-</div>
+
+
 <script>
 	function setCookie(cname, cvalue, exdays) {
 		var d = new Date();

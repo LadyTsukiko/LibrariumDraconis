@@ -61,7 +61,6 @@ class Controller
                     $cart .= ','.$_GET['id'];
 
                 } else {
-                    echo "<script type='text/javascript'>alert('fuuu');</script>";
                     $cart = $_GET['id'];
                 }
                 break;
@@ -116,7 +115,7 @@ class Controller
                 return 'cart';
         }
 
-   public function showCart()
+   public function showCart($by, $remove)
         {   $this->startSession();
             $cart = $_SESSION['cart'];
             if ($cart) {
@@ -125,24 +124,50 @@ class Controller
                 foreach ($items as $item) {
                     $contents[$item] = (isset($contents[$item])) ? $contents[$item] + 1 : 1;
                 }
-                $output[] = '<form action="index.php?action=cart&op=update" method="post" id="cart">';
+                $output[] = '<form action="index.php?action=cart&op=update" method="post">';
+                $output[] = '<div class="box">';
+                $output[] = '<table class="cart">';
+
+                foreach ($contents as $id => $qty) {
+                    $sql = 'SELECT * FROM books WHERE ID = ' . $id;
+                    $result = DB::doQuery($sql);
+                    $row = $result->fetch_assoc();
+                    $output[] = '<tr>';
+                    $output[] = '<td><a href="index.php?action=cart&op=delete&id=' . $id . '" class="r">'.$remove.'</a></td>';
+                    $output[] = '<td>' .$row['bookLabel'] . $by  . $row['authorLabel'] . '</td>';
+                    $output[] = '<td><input type="text" name="qty' . $id . '" value="' . $qty . '" size="3" maxlength="3" /></td>';
+                    $output[] = '</tr>';
+                }
+                $output[] = '</table>';
+                $output[] = '</div>';
+                $output[] = '<div><a href="index.php?action=checkout" class="button confirm cart">'.$_SESSION['order'].'</a>';
+                $output[] = '<button type="submit" class="button confirm cart">'.$_SESSION['updatecart'].'</button></div>';
+                $output[] = '</form>';
+            } else {
+                $output[] = '<p>Your shopping cart is empty.</p>';
+            }
+            return implode('', $output);
+        }
+        public function showMinCart($by)
+        {
+            $this->startSession();
+            $cart = $_SESSION['cart'];
+            if ($cart) {
+                $items = explode(',', $cart);
+                $contents = array();
+                foreach ($items as $item) {
+                    $contents[$item] = (isset($contents[$item])) ? $contents[$item] + 1 : 1;
+                }
                 $output[] = '<table class="cart">';
                 foreach ($contents as $id => $qty) {
                     $sql = 'SELECT * FROM books WHERE ID = ' . $id;
                     $result = DB::doQuery($sql);
                     $row = $result->fetch_assoc();
                     $output[] = '<tr>';
-                    $output[] = '<td><a href="index.php?action=cart&op=delete&id=' . $id . '" class="r">Remove</a></td>';
-                    $output[] = '<td>' .$row['bookLabel'] . ' by ' . $row['authorLabel'] . '</td>';
-                    //$output[] = '<td>&pound;' . $price . '</td>';
-                    $output[] = '<td><input type="text" name="qty' . $id . '" value="' . $qty . '" size="3" maxlength="3" /></td>';
-                    //$output[] = '<td>&pound;' . ($price * $qty) . '</td>';
+                    $output[] = '<td>' .$row['bookLabel'] . $by . $row['authorLabel'] . '</td>';
                     $output[] = '</tr>';
                 }
                 $output[] = '</table>';
-                //$output[] = '<p>Grand total: &pound;' . $total . '</p>';
-                $output[] = '<div><button type="submit">Update cart</button></div>';
-                $output[] = '</form>';
             } else {
                 $output[] = '<p>You shopping cart is empty.</p>';
             }
@@ -172,7 +197,10 @@ class Controller
 
                     $this->startSession();
                     $_SESSION['user'] = $login;
+                    $_SESSION['admin'] = User::checkAdmin($login);
+                    $test = $_SESSION['admin'];
                     $this->data["message"] = "Hi " . ucfirst($login) . " you just logged in!";
+                    $this->title = "Home";
                     return 'table';
                 }
             }
@@ -218,6 +246,7 @@ class Controller
             session_destroy();
             $_SESSION = array();
             $this->data["message"] = "You just logged out!";
+            $this->title = "Home";
             return 'table';
         }
 
@@ -278,11 +307,6 @@ class Controller
         public
         function order($request)
         {
-           /* $this->startSession();
-            $login = $_SESSION['user'];
-            $id = Address::getID($login);
-            $row = Address::getAddress($id);
-            $_SESSION['address'] = $row; */
             $this->data["message"] = "Hello World!";
             $this->title = "Order";
             return 'order';
@@ -308,7 +332,28 @@ class Controller
             return isset($_SESSION['user']);
         }
 
+    public  function addToDB($request){
+        $this->startSession();
+        $cart = $_SESSION['cart'];
+        if ($cart) {
+            $items = explode(',', $cart);
+            $contents = array();
+            foreach ($items as $item) {
+                $contents[$item] = (isset($contents[$item])) ? $contents[$item] + 1 : 1;
+            }
+            //$output[] = '<form action="index.php?action=cart&op=update" method="post" id="cart">';
+            $sql = "INSERT INTO `orders`(`id_book`, `id_cust`, `quantity`) VALUES ";
+            foreach ($contents as $id => $qty) {
+                $sql .= "( $id, ".Address::getID($_SESSION['user']).", $qty),";
+            }
+            $sql = rtrim($sql, ",");
+            DB::doQuery($sql);
+            unset( $_SESSION['cart']);
+    }}
 
+    public function admin($request){
+        return 'admin';
+    }
         // P R I V A T E  H E L P E R S
 
         public

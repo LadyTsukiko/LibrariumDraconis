@@ -11,8 +11,10 @@ if (!isset($_SESSION)) {session_start();}
 
 
 if ($this->controller->isLoggedIn()) {
-    echo $this->controller->showCart();
-    echo '<a href="index.php?action=checkout" class="button confirm">' .$order. '</a>';
+    $_SESSION['order']=$order;
+    $_SESSION['updatecart']=$updatecart;
+    echo $this->controller->showCart($by, $remove);
+
 }else{
     echo '<a href="index.php?action=login" class="button confirm">' .$login. '</a>';
 }

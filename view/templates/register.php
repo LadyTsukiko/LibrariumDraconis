@@ -9,7 +9,7 @@
 
 
 
-<form action="index.php?action=register" method="post">
+<form method="post" action="index.php?action=register" >
     <p><input class="field" placeholder="<?php echo $username; ?>" name="login" required></p>
     <div><div id="rsp_email"><!-- --></div>
         <input class="field" id="email" placeholder="E-Mail" name="email" onkeyup="if(this.value != '') callAjax('checkEmail', this.value, this.id);" required>
@@ -31,5 +31,7 @@
 
         }
     }
+    
+
 
 </script>

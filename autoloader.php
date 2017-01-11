@@ -6,7 +6,8 @@ function __autoload($class_name){
 		'DB/',
 		'controller/',
 		'model/',
-		'view/'
+		'view/',
+        'view/templates'
 	];
 	
 	// Try to load class

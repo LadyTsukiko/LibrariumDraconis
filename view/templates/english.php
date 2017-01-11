@@ -33,9 +33,14 @@ $zip = "Zip-Code";
 $ordermsg = "Thank you! Your order has been placed!";
 $update = "Update";
 $deliveryaddress = "Delivery address";
-
-    
-    
+$orderedbooks = "Ordered Books";
+$home = "Back to the Homepage";
+$booktitle = "Title";
+$loggedin = "You are logged in as: ";
+$logout = "Logout";
+$updatecart = "Update Cart";
+$by = " by ";
+$remove = "remove";
 
 
 

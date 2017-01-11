@@ -3,51 +3,80 @@
     display: flex;
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
-
-
     text-align: center;
-    
-    /*background-image:linear-gradient(to right, black 60%,white 60%), url("../images/icedragon.jpg");
-    background-blend-mode: darken;*/
-    
-    background-image: url("../images/icedragon.jpg");
-    
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: right top;
+    width: 100%;
+    justify-content: space-between;
 
 }
+
 
 .flex-container > * {
-    padding: 10px;
+    padding: auto;
     flex: 1 100%;
-    font-family: 'Berkshire Swash', cursive;
+
 }
-.header{
-    align-content: space-between;
-    align-items: baseline;
-    alignment: left;
+
+.nav-bar{
+    position: fixed;
+    top: 0;
     background-color: black;
+    color: #c7c7c7;
 
 }
-
-.number{
-    color: red;
-    padding: 1%;
-}
-.curPage{
-    color: aqua;
-}
-.main {
-    text-align: center;
+.info {
     background: transparent;
+    flex: 1;
+    float:right;
+}
+.links{
+    background-color: transparent;
+    float: left;
+    max-width: 20%;
+    min-width: 210px;
+}
+
+
+.main {
+    background-color: transparent;
     padding-bottom: 50px;
+    flex-grow: 3;
+    margin: auto;
+    align-items: flex-end;
+
+
+
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 2px;
+    padding: 5px;
+    text-align: center;
+    background-color: black;
+    border-top: groove;
+    border-color: #34495e;
+    border-width: 1px;
+
+
+}
+.sortassembly{
+    float:left;
+    margin-left: 2%;
+    display: block;
+    text-align: left;
+    min-width: inherit;
 }
 .title {
     font-family: 'IM Fell Great Primer SC', Serif;
-    font-size: 150%;
-    color: aqua;
+    font-size: 3em;
     background-color: transparent;
+    color: #c7c7c7;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    text-shadow: 3px 3px #000;
 
 }
 a.title:link, .title:active .title:visited {
@@ -56,37 +85,20 @@ a.title:link, .title:active .title:visited {
 
 h3 {
     font-family: 'IM Fell Great Primer SC', cursive;
-    font-size: 120%;
-}
-
-.sorting-title {
-    text-align: center;
-    float: none;
-    width: 150px;
-}
-
-.basket{
+    font-size: 2em;
+    text-shadow: 3px 3px #000;
 
 }
-/*.header {background: #123456; }*/
 
-
-.footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color: black;
-    border-top: groove;
-    border-color: #1e1e1e;
-    border-width: 2px;
+.number{
+    padding: 1%;
+    color: #c7c7c7;
+    font-family: Helvetica, Serif;
 }
-.info {
-    background: transparent;
 
-}
 .input{
-font-family: 'Berkshire Swash';
+    font-family: 'IM Fell Great Primer SC', Serif;
+    color: #c7c7c7;
 }
 
 
@@ -107,30 +119,31 @@ font-family: 'Berkshire Swash';
 }
 .button:hover{
     background-color: #4a657a;
+    cursor: pointer;
 }
 .button{
     background-color: #34495e;
     text-decoration: none;
     height: 43px;
     width: 200px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    vertical-align: middle;
+    margin: 0;
     padding: 0;
-
+    color: #c7c7c7;
     -webkit-transition: height 0.3s ease;
     transition: height 0.3s ease;
     position: relative;
     border: none;
-    color: aqua;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
 }
 
 .button.confirm{
-    vertical-align: middle;
     line-height: 43px;
-    color: aqua;
-
+    float: none;
+    height: 43px;
+    width: 200px;
 }
 
 #logged_in{
@@ -139,11 +152,15 @@ font-family: 'Berkshire Swash';
     margin-right: 1%;
     margin-left: 1%;
 
-    width: 200px;
+    width: auto;
     right: 200px;
     left: 200px;
 }
 .button.login.cartlink {
+    background-image: url("../images/basket_transparent.png");
+    background-size: 35px;
+    background-position: right;
+    background-repeat: no-repeat;
     background-color: #34495e;
     float: left;
     height: 43px;
@@ -156,18 +173,16 @@ font-family: 'Berkshire Swash';
 }
 .button.login.cartlink:hover{
     background-color: #4a657a;
-
 }
 #cart {
     height: 33px;
     float: right;
     margin: 5px;
-
-
 }
-.login {
+.button.login {
     float:right;
     line-height: 43px;
+    text-align: center;
 }
 .book {
     text-align: left;
@@ -188,45 +203,88 @@ font-family: 'Berkshire Swash';
         flex: 1 auto;
     }
 
-    .links {
-        min-width: 210px;
+
+}
+@media all and (max-width: 800px) {
+    .aside { flex: 1 auto; }
+    .links{ max-width: 100%;
+            justify-content: center;
+            align-items: center;
+
     }
+
+    .sortassembly{
+        float: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        max-width: inherit;
+    }
+
+
+
 }
 @media all and (min-width: 600px) {
     .aside { flex: 1 auto; }
-    .links { min-width: 210px;}
+
 }
 
 @media all and (min-width: 800px) {
-    .main    { flex: 3 0px; }
-    .links { order: 1; }
-    .links { max-width: 210px;}
-    .links { min-width: 210px;}
-    .main    { order: 2; }
+    .main{
+        flex: 3 0;
+        order: 2;
+
+        }
+    .links { order: 1;
+            min-width: 210px;
+        }
     .info { order: 3; }
     .footer  { order: 4; }
 }
 
 body {
+    font-family: 'IM Fell Great Primer SC', serif;
     background: black;
-    color: aqua;
+    color: #c7c7c7;
+    background-image: url("../images/icedragon.jpg");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-position-y: 86px;
+
+}
+p {
+    font-family: Helvetica, sans-serif;
 }
 table {
+    font-family: Helvetica, sans-serif;
     border-collapse: collapse;
+    text-align: left;
+    font-size: 1em;
+}
+
+.bookRow{
+    border-bottom: groove;
+    border-width: 1px;
+    border-color: #34495e;
+
+
 }
 tr:hover {background-color: #4a657a}
 th,td {
     padding: 15px;
 }
 a{
-    color: aqua;
+    color: #c7c7c7;
     padding: 10px;
 }
-a.inline{
-    padding: 0px;
+a.button.confirm{
+    height: 43px;
+    width: 200px;
 }
-header{
-    
+
+a.button.add{
+    padding: 15px;
 }
 
 nav .drop-down {
@@ -246,6 +304,15 @@ nav .drop-down {
 
 
 }
+.drop-down:hover{
+    cursor: pointer;
+
+}
+.drop-down{
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
 
 nav .drop-down.closed {
     /*  When toggled via jQuery this class will reduce the height of the ul which inconjuction
@@ -260,7 +327,6 @@ nav .drop-down li {
 
 nav .drop-down li a {
     display: block;
-    color: aqua;
     text-decoration: none;
     padding: 10px; /* Larger touch target area */
 }
@@ -299,5 +365,67 @@ nav .drop-down li:first-child a:after {
     text-align: center;
 
 }
+.cart{
+    padding: 0px;
+    position: inherit;
+    display: inline-block;
+}
+.box{
 
-/*.header {background:
+    background-color: #34495e;
+    border: groove;
+    border-width: 5px;
+    border-color: #1e1e1e;
+    line-height: 0.6em;
+    text-align: left;
+    padding-left:10px;
+    padding-right:10px;
+    margin: 5px;
+    margin-left: 20px;
+    font-family: Helvetica, serif;
+    font-size: 1em;
+
+}
+.box.title {
+    background-color: inherit;
+    border: none;
+    font-size: 1.1em;
+    font-family: 'IM Fell Great Primer SC', Serif;
+    padding-left: 20px;
+}
+
+#ordered{
+    float: none;
+    align-content: center;
+}
+
+
+
+input[type="submit"]{
+    font-family: 'IM Fell Great Primer SC', Serif;
+    font-size: 1em;
+    margin: 5px;
+    width: 200px;
+
+}
+input[type="submit"]:hover{
+    cursor: hand;
+}
+
+button[type="submit"]:hover{
+    cursor: hand;
+}
+button[type="submit"]{
+    font-family: 'IM Fell Great Primer SC', Serif;
+    font-size: 1em;
+    margin: 5px;
+    width: 200px;
+    height: 43px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
